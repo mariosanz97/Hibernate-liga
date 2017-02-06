@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 06-feb-2017 13:15:25 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="primero.Equipos" table="equipos" catalog="liga">
+        <id name="idEquipo" type="int">
+            <column name="id_equipo" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="45" not-null="true" unique="true" />
+        </property>
+        <property name="ciudad" type="string">
+            <column name="ciudad" length="45" not-null="true" />
+        </property>
+        <property name="web" type="string">
+            <column name="web" length="250" />
+        </property>
+        <property name="puntos" type="java.lang.Integer">
+            <column name="puntos" />
+        </property>
+        <set name="partidosesForEvisitante" table="partidos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="evisitante" not-null="true" />
+            </key>
+            <one-to-many class="primero.Partidos" />
+        </set>
+        <set name="jugadoreses" table="jugadores" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="equipo" />
+            </key>
+            <one-to-many class="primero.Jugadores" />
+        </set>
+        <set name="partidosesForElocal" table="partidos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="elocal" not-null="true" />
+            </key>
+            <one-to-many class="primero.Partidos" />
+        </set>
+    </class>
+</hibernate-mapping>

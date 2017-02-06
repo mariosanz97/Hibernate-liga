@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 06-feb-2017 13:15:25 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="primero.Jugadores" table="jugadores" catalog="liga">
+        <id name="idJugador" type="int">
+            <column name="id_jugador" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="equipos" class="primero.Equipos" fetch="select">
+            <column name="equipo" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="45" />
+        </property>
+        <property name="apellido" type="string">
+            <column name="apellido" length="45" />
+        </property>
+        <property name="puesto" type="string">
+            <column name="puesto" length="45" not-null="true" />
+        </property>
+        <property name="idCapitan" type="java.lang.Integer">
+            <column name="id_capitan" />
+        </property>
+        <property name="fechaAlta" type="timestamp">
+            <column name="fecha_alta" length="19" />
+        </property>
+        <property name="salario" type="java.lang.Integer">
+            <column name="salario" />
+        </property>
+        <property name="altura" type="big_decimal">
+            <column name="altura" precision="4" />
+        </property>
+    </class>
+</hibernate-mapping>

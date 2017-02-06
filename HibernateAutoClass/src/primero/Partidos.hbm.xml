@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 06-feb-2017 13:15:25 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="primero.Partidos" table="partidos" catalog="liga">
+        <id name="idPartido" type="java.lang.Integer">
+            <column name="id_partido" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="equiposByElocal" class="primero.Equipos" fetch="select">
+            <column name="elocal" not-null="true" />
+        </many-to-one>
+        <many-to-one name="equiposByEvisitante" class="primero.Equipos" fetch="select">
+            <column name="evisitante" not-null="true" />
+        </many-to-one>
+        <property name="resultado" type="string">
+            <column name="resultado" length="45" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="fecha" length="10" />
+        </property>
+        <property name="arbitro" type="string">
+            <column name="arbitro" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>
