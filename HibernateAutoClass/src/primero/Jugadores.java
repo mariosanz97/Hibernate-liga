@@ -138,7 +138,7 @@ public class Jugadores implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "Jugadores [idJugador=" + idJugador + ", equipos=" + equipos.getNombre() + ", nombre=" + nombre + ", apellido="
+		return "Jugadores [idJugador=" + idJugador + ", equipos=" + equipos.getIdEquipo() + ", nombre=" + nombre + ", apellido="
 				+ apellido + ", puesto=" + puesto + ", idCapitan=" + idCapitan + ", fechaAlta=" + fechaAlta
 				+ ", salario=" + salario + ", altura=" + altura + "]";
 	}

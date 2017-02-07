@@ -120,8 +120,8 @@ public class HibernateDemo {
 			while (homr2.hasNext()) {
 				Jugadores e = (Jugadores) homr2.next();
 				id = e.getIdJugador();
-
 			}
+			
 			Calendar fecha = Calendar.getInstance();
 
 			// System.out.println("---Fin Consulta---");
@@ -136,6 +136,8 @@ public class HibernateDemo {
 			e2.setSalario(salary);
 			e2.setEquipos(teamtin);
 			e2.setAltura(height);
+			
+			HJugadores.put(e2.getIdJugador(), e2);
 
 			s2.close();
 
@@ -145,7 +147,7 @@ public class HibernateDemo {
 			s3.save(e2);
 			s3.getTransaction().commit();
 			s3.close();
-
+			System.out.println(HJugadores.get(e2.getIdJugador()).toString());
 			break;
 		case 3:
 
@@ -195,6 +197,7 @@ public class HibernateDemo {
 			e22.setNombre(nombre6);
 			e22.setApellido(apellido6);
 			e22.setFechaAlta(fecha2.getTime());
+			e22.setPuesto(puesto2);
 			e22.setSalario(salary2);
 			e22.setEquipos(equipo2);
 			e22.setAltura(height2);
@@ -305,7 +308,7 @@ public class HibernateDemo {
 				id = e.getIdEquipo();
 
 			}
-
+			
 			System.out.println("---Fin Consulta---");
 
 			id++;
@@ -314,6 +317,9 @@ public class HibernateDemo {
 			e2.setCiudad(ciudad);
 			e2.setWeb(wb);
 			e2.setPuntos(pnt);
+			
+			HEquipos.put(e2.getIdEquipo(), e2);
+			
 			s2.close();
 
 			SessionFactory sf2 = new Configuration().configure().buildSessionFactory();
@@ -321,8 +327,12 @@ public class HibernateDemo {
 			s3.beginTransaction();
 			s3.save(e2);
 			s3.getTransaction().commit();
-
+			
+			
+			System.out.println(HEquipos.get(e2.getIdEquipo()).toString());
 			s3.close();
+			
+			
 
 			break;
 		case 3:
@@ -458,7 +468,7 @@ public class HibernateDemo {
 			System.out.println("Escribe su resultado");
 			String result = sc.next();
 
-			System.out.println("Escribe id arbitro");
+			System.out.println("Escribe arbitro");
 			String arby = sc.next();
 
 			Partidos e2 = new Partidos();
@@ -474,6 +484,10 @@ public class HibernateDemo {
 				id = e.getIdPartido();
 
 			}
+			
+			
+			
+			
 
 			Calendar fecha2 = Calendar.getInstance();
 			id++;
@@ -483,6 +497,8 @@ public class HibernateDemo {
 			e2.setResultado(result);
 			e2.setFecha(fecha2.getTime());
 			e2.setArbitro(arby);
+			
+			HPartidos.put(e2.getIdPartido(), e2);
 			s2.close();
 
 			SessionFactory sf2 = new Configuration().configure().buildSessionFactory();
@@ -492,6 +508,7 @@ public class HibernateDemo {
 			s3.getTransaction().commit();
 
 			s3.close();
+			System.out.println(HPartidos.get(e2.getIdPartido()).toString());
 
 			break;
 		case 3:

@@ -23,8 +23,8 @@ public class Partidos implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "Partidos [idPartido=" + idPartido + ", equiposByElocal=" + equiposByElocal.getNombre() + ", equiposByEvisitante="
-				+ equiposByEvisitante.getNombre() + ", resultado=" + resultado + ", fecha=" + fecha + ", arbitro=" + arbitro + "]";
+		return "Partidos [idPartido=" + idPartido + ", equiposByElocal=" + equiposByElocal.getIdEquipo() + ", equiposByEvisitante="
+				+ equiposByEvisitante.getIdEquipo() + ", resultado=" + resultado + ", fecha=" + fecha + ", arbitro=" + arbitro + "]";
 	}
 
 	private Integer idPartido;
