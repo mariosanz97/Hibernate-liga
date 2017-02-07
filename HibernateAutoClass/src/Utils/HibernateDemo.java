@@ -3,6 +3,7 @@ package Utils;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
 
@@ -14,6 +15,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.jpa.internal.HEMLogging;
 
 import primero.Jugadores;
 import primero.Equipos;
@@ -22,7 +24,11 @@ import primero.Partidos;
 import java.util.List;
 
 public class HibernateDemo {
+	static HashMap<Integer, Jugadores> HJugadores = new HashMap<Integer, Jugadores>();
+	static HashMap<Integer, Equipos> HEquipos = new HashMap<Integer, Equipos>();
+	static HashMap<Integer, Partidos> HPartidos = new HashMap<Integer, Partidos>();
 
+	
 	public static void main(String[] args) {
 
 		System.out.println(
@@ -42,16 +48,20 @@ public class HibernateDemo {
 			Partidos();
 			break;
 		}
+
 		main(args);
 	}
 
 	public static void Jugadores() {
-		System.out.println(".......................... \n" + ".  1 Leer \n" + ".  2 Insert  \n" + ".  3 Update \n"
-				+ ".  4 Delete \n");
+		System.out.println(".......................... \n" + ".  0 atras \n" + ".  1 Leer \n" + ".  2 Insert  \n"
+				+ ".  3 Update \n" + ".  4 Delete \n");
 
 		Scanner sc = new Scanner(System.in);
 		int keyS = sc.nextInt();
 
+		
+		
+		
 		switch (keyS) {
 		case 1:
 			Session s1 = HibernateUtil.getSessionFactory().openSession();
@@ -62,7 +72,9 @@ public class HibernateDemo {
 			Iterator homr = results.iterator();
 			while (homr.hasNext()) {
 				Jugadores e = (Jugadores) homr.next();
-				System.out.println(e.getNombre() + " " + e.getApellido());
+				//System.out.println(e.getNombre() + " " + e.getApellido());
+				HJugadores.put(e.getIdJugador(), e);
+				System.out.println(HJugadores.get(e.getIdJugador()).toString());
 
 			}
 
@@ -98,7 +110,7 @@ public class HibernateDemo {
 
 			Jugadores e2 = new Jugadores();
 
-			System.out.println("---Inicio Consulta---");
+			// System.out.println("---Inicio Consulta---");
 			Session s2 = HibernateUtil.getSessionFactory().openSession();
 
 			Query q2 = s2.createQuery("select e from Jugadores e");
@@ -112,7 +124,7 @@ public class HibernateDemo {
 			}
 			Calendar fecha = Calendar.getInstance();
 
-			System.out.println("---Fin Consulta---");
+			// System.out.println("---Fin Consulta---");
 
 			id++;
 			e2.setIdJugador(id);
@@ -132,7 +144,6 @@ public class HibernateDemo {
 			s3.beginTransaction();
 			s3.save(e2);
 			s3.getTransaction().commit();
-
 			s3.close();
 
 			break;
@@ -238,8 +249,8 @@ public class HibernateDemo {
 	}
 
 	public static void Equipos() {
-		System.out.println(".......................... \n" + ".  1 Leer \n" + ".  2 Insert  \n" + ".  3 Update \n"
-				+ ".  4 Delete \n");
+		System.out.println(".......................... \n" + ".  0 atras \n" + ".  1 Leer \n" + ".  2 Insert  \n"
+				+ ".  3 Update \n" + ".  4 Delete \n");
 
 		Scanner sc = new Scanner(System.in);
 		int keyS = sc.nextInt();
@@ -255,8 +266,9 @@ public class HibernateDemo {
 			Iterator homr = results.iterator();
 			while (homr.hasNext()) {
 				Equipos e = (Equipos) homr.next();
-				System.out.println(e.getNombre());
-
+				//System.out.println(e.getNombre());
+				HEquipos.put(e.getIdEquipo(), e);
+				System.out.println(HEquipos.get(e.getIdEquipo()).toString());
 			}
 
 			s1.close();
@@ -400,8 +412,8 @@ public class HibernateDemo {
 	}
 
 	public static void Partidos() {
-		System.out.println(".......................... \n" + ".  1 Leer \n" + ".  2 Insert  \n" + ".  3 Update \n"
-				+ ".  4 Delete \n");
+		System.out.println(".......................... \n" + ".  0 atras \n" + ".  1 Leer \n" + ".  2 Insert  \n"
+				+ ".  3 Update \n" + ".  4 Delete \n");
 
 		Scanner sc = new Scanner(System.in);
 		int keyS = sc.nextInt();
@@ -417,7 +429,9 @@ public class HibernateDemo {
 			Iterator homr = results.iterator();
 			while (homr.hasNext()) {
 				Partidos e = (Partidos) homr.next();
-				System.out.println(e.getIdPartido() + ",  " + e.getResultado());
+				//System.out.println(e.getIdPartido() + ",  " + e.getResultado());
+				HPartidos.put(e.getIdPartido(), e);
+				System.out.println(HPartidos.get(e.getIdPartido()).toString());
 
 			}
 
@@ -449,7 +463,6 @@ public class HibernateDemo {
 
 			Partidos e2 = new Partidos();
 
-			System.out.println("---Inicio Consulta---");
 			Session s2 = HibernateUtil.getSessionFactory().openSession();
 
 			Query q2 = s2.createQuery("select e from Partidos e");
@@ -462,7 +475,6 @@ public class HibernateDemo {
 
 			}
 
-			System.out.println("---Fin Consulta---");
 			Calendar fecha2 = Calendar.getInstance();
 			id++;
 			e2.setIdPartido(id);
@@ -518,7 +530,7 @@ public class HibernateDemo {
 			System.out.println("Escribe su resultado");
 			String result2 = sc.next();
 
-			System.out.println("Escribe id arbitro");
+			System.out.println("Escribe  arbitro");
 			String arby2 = sc.next();
 
 			Session s7 = HibernateUtil.getSessionFactory().openSession();
@@ -549,30 +561,29 @@ public class HibernateDemo {
 			Iterator homr4 = results4.iterator();
 			while (homr4.hasNext()) {
 				Partidos e = (Partidos) homr4.next();
-				System.out.println("id-------> " + e.getIdPartido() + " la id equipo local " + e.getEquiposByElocal() + " id del visitante "
-						+ e.getEquiposByEvisitante()+" y resultado "+e.getResultado());
+				System.out.println("id-------> " + e.getIdPartido() + " la id equipo local " + e.getEquiposByElocal()
+						+ " id del visitante " + e.getEquiposByEvisitante() + " y resultado " + e.getResultado());
 
 			}
 			s4.close();
 
-			 System.out.println("Fin Consulta");
-			
-			  System.out.println("Inicio Borrado"); 
-			  Session s33 =  HibernateUtil.getSessionFactory().openSession();
-			  s33.beginTransaction();
-			  
-			  System.out.
-			  println("Escribe la id del partido que quieres borrar");
-			  Scanner sc2 = new Scanner(System.in); 
-			  int idd = sc2.nextInt();
-			  
-			  Query q22 = s33.createQuery("delete from Partidos where id = " + idd + ""); 
-			  
-			  q22.executeUpdate();
-			  s33.getTransaction().commit();
-			  s33.close();
-			  System.out.println("---Fin Borrado---");
-			 
+			System.out.println("Fin Consulta");
+
+			System.out.println("Inicio Borrado");
+			Session s33 = HibernateUtil.getSessionFactory().openSession();
+			s33.beginTransaction();
+
+			System.out.println("Escribe la id del partido que quieres borrar");
+			Scanner sc2 = new Scanner(System.in);
+			int idd = sc2.nextInt();
+
+			Query q22 = s33.createQuery("delete from Partidos where id = " + idd + "");
+
+			q22.executeUpdate();
+			s33.getTransaction().commit();
+			s33.close();
+			System.out.println("---Fin Borrado---");
+
 			break;
 		default:
 			break;

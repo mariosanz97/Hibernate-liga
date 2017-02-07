@@ -136,4 +136,13 @@ public class Jugadores implements java.io.Serializable {
 		this.altura = altura;
 	}
 
+	@Override
+	public String toString() {
+		return "Jugadores [idJugador=" + idJugador + ", equipos=" + equipos.getNombre() + ", nombre=" + nombre + ", apellido="
+				+ apellido + ", puesto=" + puesto + ", idCapitan=" + idCapitan + ", fechaAlta=" + fechaAlta
+				+ ", salario=" + salario + ", altura=" + altura + "]";
+	}
+	
+	
+
 }

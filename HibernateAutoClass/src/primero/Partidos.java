@@ -21,6 +21,12 @@ import javax.persistence.TemporalType;
 @Table(name = "partidos", catalog = "liga")
 public class Partidos implements java.io.Serializable {
 
+	@Override
+	public String toString() {
+		return "Partidos [idPartido=" + idPartido + ", equiposByElocal=" + equiposByElocal.getNombre() + ", equiposByEvisitante="
+				+ equiposByEvisitante.getNombre() + ", resultado=" + resultado + ", fecha=" + fecha + ", arbitro=" + arbitro + "]";
+	}
+
 	private Integer idPartido;
 	private Equipos equiposByElocal;
 	private Equipos equiposByEvisitante;

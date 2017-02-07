@@ -18,6 +18,13 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "equipos", catalog = "liga", uniqueConstraints = @UniqueConstraint(columnNames = "nombre"))
 public class Equipos implements java.io.Serializable {
 
+	@Override
+	public String toString() {
+		return "Equipos [idEquipo=" + idEquipo + ", nombre=" + nombre + ", ciudad=" + ciudad + ", web=" + web
+				+ ", puntos=" + puntos + ", partidosesForEvisitante=" + partidosesForEvisitante + ", jugadoreses="
+				+ jugadoreses + ", partidosesForElocal=" + partidosesForElocal + "]";
+	}
+
 	private int idEquipo;
 	private String nombre;
 	private String ciudad;
